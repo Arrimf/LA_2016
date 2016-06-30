@@ -90,6 +90,11 @@ std::ostream& operator<<(std::ostream&os, const Rect& R){
 	return os << "Rect: LeftTop-(" << R.m_LTop << "), RightBottom-(" << R.m_RBottom << ")";
 }
 
+std::ostream & operator<<(std::ostream& os, const Rect* S)
+{
+	return os << *S;
+}
+
 void Rect::WhereAmI() {
 	std::cout << "Now I am in class Rect" << std::endl;
 }

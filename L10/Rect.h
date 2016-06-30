@@ -28,14 +28,14 @@ public:
 	inline virtual Shape* Clone()const { return new Rect(*this); }
 	inline virtual Shape* CloneAdr() const{ return new/*std::move*/Rect(std::move(*this));}
 	
-	inline virtual	std::ostream& osPrint(std::ostream& os) const { return os <<*this ; }
+	
 
 	void Inflate(double  dl, double  dr, double  dt, double  db);
 	void Inflate(double dx = 1, double dy = 1);
 	virtual void Inflate(double delta = 1);
 	void SetAll(double l = 0, double r = 0, double t = 0, double b = 0);
 	void GetAll(double& l, double& r, double& t, double& b)const;
-
+	inline operator Shape*() { return this; }
 	virtual double GetArea()const;
 	virtual double OffsetZero()const;
 	Point GetCentr()const;
@@ -46,7 +46,9 @@ public:
 	//virtual Shape& operator=(const Shape&);
 	Rect& operator=(const Rect&) = default;
 	Rect& operator=(Rect&&) = default;
+	inline virtual	std::ostream& osPrint(std::ostream& os) const { return os << *this; }
 	friend std::ostream& operator<<(std::ostream&, const  Rect&);
+	friend std::ostream& operator<<(std::ostream&, const Rect*);
 	//Shape* operator*(Rect&) { return static_cast<Shape*>(this); };
 };
 

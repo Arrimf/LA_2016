@@ -18,10 +18,12 @@
 #include <ctime>
 #include "myString.h"
 #include "Shape.h"
+#include "Rect.h"
 #include "Point.h"
 #include "Templs.h"
 
 using namespace std;	
+
 #define	  stop __asm nop
 #define  _SP system("pause");
 
@@ -117,8 +119,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	//это было бы не эффективно => для списка сортировка реализована методом класса!!!
 	
 		sort(poiVect.begin(), poiVect.end());
-		PrintCont(poiVect);
-		_SP
+		//PrintCont(poiVect);
+		//_SP
 
 
 
@@ -126,18 +128,50 @@ int _tmain(int argc, _TCHAR* argv[])
 			//итератор на элемент Point, удовлетворяющий условию: координаты x и y лежат в промежутке
 			//[-n, +m].
 
-			//double n = 4;
-		//	double m = 7;
-	//vector<Point> res = ptList2
+			double n = 4;
+			double m = 7;
+
+			//unary_function < Point&, bool > pred = [](Point& poi)->bool {return poi.GetX() > poi.GetY();};
+
+			auto itb = ptList2.begin();
+			auto ite = ptList2.end();
+			vector<Point> res;
+			
+			while ( (itb = find_if(itb, ite, [n, m](Point& poi) 
+				{return (((poi.GetX()) >= n && (poi.GetX() <= m)) || ((poi.GetY() >= n) && (poi.GetY() <= m)));}))
+					!= ite) {
+				res.push_back(*itb);
+				++itb;
+				};
+			
+			//PrintCont(res);
+			//_SP
 
 	//С помощью алгоритма sort() отсортируйте любую последовательность элементов Rect,
 	//располагая прямоугольники по удалению центра от начала координат.
 	
+			vector<Shape*> ShapesList;
 
+			for (int i = 0; i < 20;i++) {
+				int tmp = rand() % 2;
+				if (tmp) {
+					ShapesList.push_back(new Rect(RandPoi(), RandPoi()));
+				}
+				else {
+					ShapesList.push_back(new Circle(RandPoi(), RandPoi()));
 
+				}
+			}
+				//Print(ShapesList, &Shape::OffsetZero);
+				//_SP
 
+				sort(ShapesList.begin(), ShapesList.end(), [](Shape* obj1, Shape* obj2) {
+								return obj1->OffsetZero() < obj2->OffsetZero();
+				});
 
-
+				//Print(ShapesList);
+				//Print(ShapesList, &Shape::OffsetZero);
+				//_SP
 
 	{//transform
 		//Напишите функцию, которая с помощью алгоритма transform переводит 
@@ -145,12 +179,27 @@ int _tmain(int argc, _TCHAR* argv[])
 		//Подсказка: класс string - это "почти" контейнер, поэтому для него
 		// определены методы begin() и end()
 
+		string str = "qWerTYy";
+		string str2;
+		str2.resize(str.size());
+		transform(str.begin(), str.end(), str2.begin(), [](const char t)->char {return tolower(t);});
+		Print(str2);
+		_SP
+			//Заполните list объектами string. С помощью алгоритма transform сформируте
+			//значения "пустого" set, конвертируя строки в нижний регистр
+			list<string> StrS;
+		StrS.push_back(str);
+		StrS.push_back("aAFasdgagADFHAFgaWERa");
+		StrS.push_back("ASQWecxvzxGdRGDCNYU");
+		StrS.push_back("QWEDFdfAWqwe");
 
-		//Заполните list объектами string. С помощью алгоритма transform сформируте
-		//значения "пустого" set, конвертируя строки в нижний регистр
-	
-
-
+		set<string>SetStr;
+		auto itB = StrS.begin();
+		auto itE = StrS.end();
+		auto itDest = SetStr;
+		while (itB != itE){
+			//transform(*itB.begin());
+		}
 
 		stop
 	}

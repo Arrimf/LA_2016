@@ -32,6 +32,7 @@ public:
 
 	bool operator==(const Circle&)const;
 	virtual bool operator==(const Shape&) const;
+	inline operator Shape*() { return this; }
 	//virtual Shape& operator=(const Shape&);
 	Circle& operator=(const Circle&) = default;
 	Circle& operator=(Circle&&) = default;

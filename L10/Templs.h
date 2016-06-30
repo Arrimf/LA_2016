@@ -19,13 +19,16 @@ void RandPoiAssigner(T& cont) {
 	});
 	
 };
+ Point RandPoi() {
+	return Point((87.0 / (rand() % 10 + 1)), (87.0 / (rand() % 10 + 1)));
+}
 template<typename T>
 T PoiFinder(T&obj, Point& poi) {
 	T tmp;
 	auto it = obj.begin();
 	auto ite = obj.end();
 	while (it != ite) {
-		tmp.insert(tmp.end(), *(it = find(it, obj.end(), poi)));
+		tmp.insert(tmp.end(), *(it = find(it, ite, poi)));
 		++it;
 	}
 	return tmp;
@@ -61,6 +64,16 @@ void Print(const T& obj) {
 	int size = obj.size();
 	for (int i = 0; i < size; i++)	{
 		std::cout << *it << std::endl;
+		++it;
+	}
+}
+template<typename T, typename V, typename F >
+void Print(const T& obj, V(F::*pred)()const) {
+
+	auto it = obj.begin();
+	int size = obj.size();
+	for (int i = 0; i < size; i++) {
+		std::cout <<"val"<<(*it->*pred)() <<" "<<*it << std::endl;
 		++it;
 	}
 }

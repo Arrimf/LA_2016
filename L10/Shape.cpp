@@ -38,6 +38,11 @@ std::ostream & operator<<(std::ostream& os, const colour & col)
 	
 }
 
+std::ostream & operator<<(std::ostream & os, const Shape *S)
+{
+	return  S->osPrint(os);
+}
+
 double Shape::CompSize(const Shape&S1, const Shape&S2)
 {
 	return S1.GetArea() - S2.GetArea();

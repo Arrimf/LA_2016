@@ -47,7 +47,7 @@ class Shape{
 	virtual bool operator==(const Shape&)const;
 	//virtual Shape& operator=(const Shape&) 0;
 	friend std::ostream& operator<<(std::ostream& , const colour&);
-	
+	friend std::ostream& operator<<(std::ostream&, const Shape*);
 
 };
 
